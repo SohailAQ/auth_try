@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     # 3rd Party apps
     'django_extensions',
 
+    # User management
+    'users.apps.UsersConfig',
+
     # Local Apps
     'pages.apps.PagesConfig',
 ]
@@ -132,6 +135,9 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# User Management
+AUTH_USER_MODEL = 'users.CustomUser'
+
 # django-allauth config settings
 LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_LOGOUT_REDIRECT = 'home'
@@ -153,3 +159,19 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+
+# Social accounts
+SOCIALACCOUNT_QUERY_EMAIL = True
+ACCOUNT_LOGOUT_ON_GET = True
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
